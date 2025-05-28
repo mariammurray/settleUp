@@ -1,0 +1,19 @@
+button {
+  padding: 0.5rem 1rem;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.selected {
+  background-color: #4caf50;
+  color: white;
+  border-color: #388e3c;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
