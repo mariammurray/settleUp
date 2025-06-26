@@ -3,6 +3,7 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import dotenv from "dotenv";
+import { fileURLToPath } from 'url';
 dotenv.config({ path: '../.env' });
 
 const app = express();
@@ -17,9 +18,17 @@ const io = new Server(server, {
   }
 });
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "../dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
+
 const roomBets = new Map();
 
 io.on("connection", (socket) => {
+  // defining the events I will listen for on the frontend
   
   socket.on("submit-bet", ({ roomId, user, bet }) => {
     console.log(roomId, user, bet);
