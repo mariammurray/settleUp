@@ -12,7 +12,6 @@ dist
 dist-ssr
 *.local
 .env
-package-lock.json
 examplejson.txt
 oldapi.jsx
 assets
