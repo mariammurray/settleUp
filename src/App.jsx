@@ -27,36 +27,6 @@ function App() {
     localStorage.removeItem('username');
   };
 
-  
-
-//   function socketsLive(){
-//   const APIkey = import.meta.env.VITE_API_KEY;
-//   var socket  = new WebSocket('wss://wss.apifootball.com/livescore?APIkey='+APIkey+'&timezone=+03:00');
-  
-// 	console.log('Connecting...');	
-// 	socket.onopen = function(e) {
-// 		alert('Connected');
-// 		console.log('Connected');
-// 		console.log('Waiting data...');
-// 	}		  
-// 	socket.onmessage = function(e) {
-// 		alert( e.data );
-// 		if (e.data) {
-// 			var data = JSON.parse(e.data);
-// 			console.log(data);
-// 		} else {
-// 			console.log('No new data!');
-// 		}
-// 	}
-// 	socket.onclose = function(){
-// 		setTimeout(socketsLive, 5000);
-// 	}
-
-// }
-// socketsLive();
-
-
-
 
   return (
       <BrowserRouter>

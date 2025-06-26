@@ -95,7 +95,6 @@ function Room() {
       setSelections((prev) =>
         prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
       );
-      console.log(selections);
     };
 
     const handleSubmit = () => {
