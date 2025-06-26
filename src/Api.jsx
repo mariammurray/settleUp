@@ -9,27 +9,36 @@ class DataApi {
             const res = await fetch(`https://apiv3.apifootball.com/?action=get_events&from=${dateYMD}&to=${dateYMD}-18&timezone=Europe/London&APIkey=${APIkey}`);
             const data = await res.json();
             const now = new Date();
-            const filtered = data
-                .filter(match => {
 
-                const [hours, minutes] = match.match_time.split(":").map(Number);
-                const matchTime = new Date(now);
-                matchTime.setHours(hours, minutes, 0, 0);
-                const difference = matchTime - now;
-// or include if match_live =1
-                // Match started within last 2.5 hours or will start in next 0.5 hours
-                return difference >= -9000000 && difference <= 1800000;
-        })
-                .map(match => ({
-                    home: match.match_hometeam_name,
-                    away: match.match_awayteam_name,
-                    id: match.match_id,
-                    time: match.match_time
-          }));
-      return filtered;
-    } catch (err) {
-        console.log(err);
-    }
+            const timeFiltered = data.filter(match => {
+            const [hours, minutes] = match.match_time.split(":").map(Number);
+            const matchTime = new Date(now);
+            matchTime.setHours(hours, minutes, 0, 0);
+            const difference = matchTime - now;
+
+            // Match started within last 2.5 hours or will start in next 0.5 hours
+            return difference >= -9000000 && difference <= 5400000;
+        });
+
+            const matchesWithOdds = await Promise.all(
+                timeFiltered.map(async match => {
+                    const odds = await this.getLiveOdds(match.match_id);
+                    return odds ? {
+                        home: match.match_hometeam_name,
+                        away: match.match_awayteam_name,
+                        id: match.match_id,
+                        time: match.match_time,
+                        odds
+                    } : null;
+                })
+            );
+            const filtered = matchesWithOdds.filter(match => match !== null);
+
+            return filtered;
+
+        } catch (err) {
+            console.log(err);
+        }
 
     }
 

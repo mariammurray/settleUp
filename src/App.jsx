@@ -4,10 +4,6 @@ import { v4 as uuidv4 } from 'uuid';
 import Home from './Home';
 import Room from './Room';
 import Username from './Username'
-import { NavLink } from "react-router-dom";
-import { Navbar, Nav, NavItem } from "reactstrap";
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import DataApi from './Api';
 
 

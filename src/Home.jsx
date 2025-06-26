@@ -21,17 +21,25 @@ function Home({matches}) {
   }
 
   return (
-    <div>
-        <button onClick={(e) => newRoom(e, "custom")}>Create Your Own Room</button>
-        <div className='matchesDiv'>
-            {matches.map((match) => (
-            <Link to="/username" onClick={(e) => newRoom(e, match.id)} key={match.id}><h2>
-                {match.home} vs {match.away} at {match.time}
-            </h2></Link>
-            ))}
-        </div>
+  <div className="min-h-screen bg-lime-950 text-white flex items-center justify-center px-4">
+    <div className="w-full max-w-xl text-center">
+      <h1 className="text-3xl font-bold mb-6 text-lime-200">What's On</h1>
+
+      <div className="grid gap-4">
+        {matches.map((match) => (
+          <Link
+            to="/username"
+            onClick={(e) => newRoom(e, match.id)}
+            key={match.id}
+            className="block rounded-2xl bg-lime-800 hover:bg-lime-700 text-white px-6 py-4 text-lg font-medium shadow-md transition-colors duration-200"
+          >
+            {match.home} vs {match.away} at {match.time}
+          </Link>
+        ))}
+      </div>
     </div>
-  )
+  </div>
+);
 }
 
 export default Home
