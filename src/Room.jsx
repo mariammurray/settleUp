@@ -52,6 +52,15 @@ function Room() {
     }
 
     useEffect(() => {
+      roomSocket.on("connect", () => {
+        console.log("Socket connected:", roomSocket.id);
+      });
+
+      return () => {
+        roomSocket.off("connect");
+      };
+    }, []);
+    useEffect(() => {
       const fetchDataAndStartSocket = async () => {
 
         if (!user) {
