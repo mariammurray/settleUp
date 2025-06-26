@@ -13,7 +13,7 @@ function Home({matches}) {
 
     const roomId = uuidv4();
     let url = "/room/" + eventId + "/" + roomId
-        console.log(url);
+    // keeping this as a state allows me to redirect to the Username screen and then return to the unique room link
     navigate('/username', {
       state: { url: url }
     });
